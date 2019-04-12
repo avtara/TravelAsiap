@@ -218,3 +218,12 @@
     background-color: dodgerblue;
 }
 
+.tiket{
+	width: 200px;
+	height: 130px;
+	border-radius: 10px;
+	border: #9E9E9E 1px dashed;
+	text-align: center;
+	padding-top: 40px;
+}
+
