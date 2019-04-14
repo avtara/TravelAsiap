@@ -44,8 +44,8 @@
       <div class="header py-4">
         <div class="container">
           <div class="d-flex">
-            <a class="header-brand" href="./index.html">
-              <img src="./demo/brand/tabler.svg" class="header-brand-img" alt="tabler logo">
+            <a class="header-brand" href="<?php echo base_url();?>">
+            <img src="<?php echo base_url();?>assets/images/TicketAsiap.svg" class="header-brand-img" style="width:130px;" alt="asiap logo">
             </a>
             <div class="d-flex order-lg-2 ml-auto">
               <div class="nav-item d-none d-md-flex">
@@ -63,7 +63,7 @@
       </div>
     </div>
     <div id="booking" class="section">
-      <div class="section-center">
+      <div class="section-center"> 
         <div class="container">
           <div class="row">
             <div class="col-md-7 col-md-push-5">
@@ -76,13 +76,15 @@
             </div>
             <div class="col-md-4 col-md-pull-7">
               <div class="booking-form">
-                <form>
+              <form action="<?php echo site_url('Home/result'); ?>" method="get" accept-charset="utf-8">
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="form-group">
                         <span class="form-label">Asal Keberangkatan</span>
-                        <select class="form-control" type="" >
-                          <option value="volvo">Purwokerto (PWT) - SOEDIRMAN</option>
+                        <select class="form-control" name="rute_from" >
+                        <?php foreach ($rute as $data) { ?>
+					<option value="<?php echo $data->rute_from ?>"><?php echo $data->rute_from ?></option>
+					<?php } ?>
                         </select>
                         <span class="select-arrow"></span>
                       </div>
@@ -90,31 +92,33 @@
                   </div>
                   <div class="form-group">
                     <span class="form-label">Tujuan Keberangkatan</span>
-                    <select class="form-control" type="" >
-                      <option value="volvo">Purwokerto (PWT) - SOEDIRMAN</option>
+                    <select class="form-control" name="rute_to" >
+                    <?php foreach ($rute_to as $data) { ?>
+							<option value="<?php echo $data->rute_to ?>"><?php echo $data->rute_to ?></option>
+							<?php } ?>
                     </select>
                     <span class="select-arrow"></span>
                   </div>
                   
                   <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-8">
                       <div class="form-group">
-                        <span class="form-label">Keberangkatan</span>
-                        <input class="form-control" type="date" required>
+                        <span class="form-label">Tanggal Keberangkatan</span>
+                        <input class="form-control" type="date" name="depart_at" required>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
                     <span class="form-label">Penumpang</span>
-                    <select class="form-control">
-                      <option>1 Dewasa</option>
-                      <option>2 Dewasa</option>
-                      <option>3 Dewasa</option>
+                    <select name="penumpang" class="form-control">
+                      <option value="1">1 Dewasa</option>
+                      <option value="2">2 Dewasa</option>
+                      <option value="3">3 Dewasa</option>
                     </select>
                     <span class="select-arrow"></span>
                   </div>
                   <div class="form-btn">
-                    <button class="submit-btn">Check availability</button>
+                    <button class="submit-btn" type="submit">Cari Tiket</button>
                   </div>
                 </form>
               </div>

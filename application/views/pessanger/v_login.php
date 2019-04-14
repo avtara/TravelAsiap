@@ -12,29 +12,29 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="icon" href="<?php echo base_url();?>favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url();?>favicon.ico" />
     <!-- Generated: 2018-04-16 09:29:05 +0200 -->
-    <title>Login - tabler.github.io - a responsive, flat and full featured admin template</title>
+    <title>Travel Ahsiyap</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-    <script src="./assets/js/require.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/require.min.js"></script>
     <script>
       requirejs.config({
           baseUrl: '.'
       });
     </script>
     <!-- Dashboard Core -->
-    <link href="./assets/css/dashboard.css" rel="stylesheet" />
-    <script src="./assets/js/dashboard.js"></script>
+    <link href="<?php echo base_url();?>assets/css/dashboard.css" rel="stylesheet" />
+    <script src="<?php echo base_url();?>assets/js/dashboard.js"></script>
     <!-- c3.js Charts Plugin -->
-    <link href="./assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
-    <script src="./assets/plugins/charts-c3/plugin.js"></script>
+    <link href="<?php echo base_url();?>assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
+    <script src="<?php echo base_url();?>assets/plugins/charts-c3/plugin.js"></script>
     <!-- Google Maps Plugin -->
-    <link href="./assets/plugins/maps-google/plugin.css" rel="stylesheet" />
-    <script src="./assets/plugins/maps-google/plugin.js"></script>
+    <link href="<?php echo base_url();?>assets/plugins/maps-google/plugin.css" rel="stylesheet" />
+    <script src="<?php echo base_url();?>assets/plugins/maps-google/plugin.js"></script>
     <!-- Input Mask Plugin -->
-    <script src="./assets/plugins/input-mask/plugin.js"></script>
+    <script src="<?php echo base_url();?>assets/plugins/input-mask/plugin.js"></script>
   </head>
   <body class="">
     <div class="page">
@@ -43,27 +43,20 @@
           <div class="row">
             <div class="col col-login mx-auto">
               <div class="text-center mb-6">
-                <img src="./assets/brand/tabler.svg" class="h-6" alt="">
+                <img src="<?php echo base_url();?>assets/images/TicketAsiap.svg" class="h-6" alt="dsc">
               </div>
-              <form class="card" action="" method="post">
+              <?php echo form_open('home/login', 'class="card" action=" echo site_url("home/login") method="post"'); ?>
                 <div class="card-body p-6">
-                  <div class="card-title">Login to your account</div>
+                  <div class="card-title">Silahkan masuk</div>
                   <div class="form-group">
-                    <label class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label class="form-label">Alamat Email</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                   </div>
                   <div class="form-group">
                     <label class="form-label">
                       Password
-                      <a href="./forgot-password.html" class="float-right small">I forgot password</a>
                     </label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                  </div>
-                  <div class="form-group">
-                    <label class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" />
-                      <span class="custom-control-label">Remember me</span>
-                    </label>
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                   </div>
                   <div class="form-footer">
                     <button type="submit" class="btn btn-primary btn-block">Sign in</button>
@@ -71,7 +64,7 @@
                 </div>
               </form>
               <div class="text-center text-muted">
-                Don't have account yet? <a href="./register.html">Sign up</a>
+                Don't have account yet? <a href="<?php echo base_url();?>register.html">Sign up</a>
               </div>
             </div>
           </div>
