@@ -45,18 +45,21 @@
               <div class="text-center mb-6">
                 <img src="<?php echo base_url();?>assets/images/TicketAsiap.svg" class="h-6" alt="dsc">
               </div>
+							<p><?php echo $this->session->flashdata('msg'); ?></p>
               <?php echo form_open('home/login', 'class="card" action=" echo site_url("home/login") method="post"'); ?>
                 <div class="card-body p-6">
                   <div class="card-title">Silahkan masuk</div>
                   <div class="form-group">
-                    <label class="form-label">Alamat Email</label>
-                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" id="exampleInputEmail1"  placeholder="Username">
+                    <span class="form-required"><?php echo form_error('username'); ?></span>
                   </div>
                   <div class="form-group">
                     <label class="form-label">
                       Password
                     </label>
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <span class="form-required"><?php echo form_error('password'); ?></span>
                   </div>
                   <div class="form-footer">
                     <button type="submit" class="btn btn-primary btn-block">Sign in</button>

@@ -7,25 +7,40 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('M_Home');
+		$this->load->model('M_auth');
 	}
 	public function index()
 	{
 		$data['rute'] = $this->M_Home->rute_from();
 		$data['rute_to'] = $this->M_Home->rute_to();
-		$this->load->view('pessanger/index',$data);
+		
+		if($this->session->userdata('ses_level')=='1'){
+			$this->load->view('pessanger/logged/index',$data);
+		}else{
+			$this->load->view('pessanger/index',$data);
+		}
 	}
 	public function result(){
 		$data['rute'] = $this->M_Home->search();
 		$data['remains'] = $this->M_Home->remains();
 
-		$this->load->view('pessanger/v_ticket',$data);	
+		if($this->session->userdata('ses_level')=='1'){
+			$this->load->view('pessanger/logged/v_ticket',$data);
+		}else{
+			$this->load->view('pessanger/v_ticket',$data);
+		}	
 	}
 
 	public function user_booking(){
 		// $data['rute'] = $this->M_Home->search();
 		// $data['remains'] = $this->M_Home->remains();
-		$this->input->get('param_name');
-		$this->load->view('pessanger/v_reservation');	
+		
+		if($this->session->userdata('ses_level')=='1'){
+			$this->load->view('pessanger/v_reservation');	
+		}else{
+			redirect(site_url('home/login'));
+		}
+		
 	}
 
 	public function login()
@@ -43,29 +58,30 @@ class Home extends CI_Controller {
 			$username=htmlspecialchars($this->input->post('username',TRUE),ENT_QUOTES);
 			$password=htmlspecialchars($this->input->post('password',TRUE),ENT_QUOTES);
 
-			$cek_login=$this->login_m->auth($username,$password);
+			$cek_login=$this->M_auth->auth($username,$password);
 
 			if($cek_login->num_rows() > 0)
 			{
 				$data=$cek_login->row_array();
 				$this->session->set_userdata('masuk',TRUE);
-				if($data['user_level']=='1'){
-					$this->session->set_userdata('akses','1');
-					$this->session->set_userdata('ses_id',$data['username']);
-					$this->session->set_userdata('ses_nama',$data['fullname']);
+				if($data['level']=='1'){
+					$this->session->set_userdata('ses_id',$data['id_user']);
+					$this->session->set_userdata('ses_fullname',$data['fullname']);
 					$this->session->set_userdata('ses_level',$data['level']);
-					redirect('welcome/index');
+					$this->session->set_userdata('ses_email',$data['email']);
+					$this->session->set_userdata('ses_handphone',$data['handphone']);
+					redirect('home/index');
 				}else{ 
 					$this->session->set_userdata('akses','2');
 					$this->session->set_userdata('ses_id',$data['username']);
 					$this->session->set_userdata('ses_nama',$data['fullname']);
 					$this->session->set_userdata('ses_level',$data['level']);
-					redirect('welcome/index');
+					redirect('home/index');
 				}
 			}else{$this->session->set_flashdata('msg', '<div class="alert alert-icon alert-danger" role="alert">
 				<i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> <b>Username</b> atau <b>Password</b> anda salah, silahkan coba lagi!
 				</div>');
-			redirect('welcome/login');};
+			redirect('home/login');};
 		}
 	}
 

@@ -19,12 +19,8 @@
     <title>Travel Ahsiyap</title> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-    <script src="<?php echo base_url();?>assets/js/require.min.js"></script>
-    <script>
-        requirejs.config({
-            baseUrl: '.'
-        });
-    </script>
+    <script src="<?php echo base_url();?>assets/js/vendors/jquery-3.2.1.min.js"></script>
+  <script src="<?php echo base_url();?>assets/js/vendors/bootstrap.bundle.min.js"></script>
     <!-- Dashboard Core -->
     <link href="<?php echo base_url();?>assets/css/dashboard.css" rel="stylesheet" />
     <link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet" />
@@ -43,22 +39,33 @@
         <div class="page-main">
             <div class="header py-4">
                 <div class="container">
-                    <div class="d-flex">
-                        <a class="header-brand" href="<?php echo base_url();?>">
-                        <img src="<?php echo base_url();?>assets/images/TicketAsiap.svg" class="header-brand-img" style="width:130px;" alt="asiap logo">
-                        </a>
-                        <div class="d-flex order-lg-2 ml-auto">
-                            <div class="nav-item d-none d-md-flex">
-                                <a href="fb.com" class="btn btn-secondary">Secondary</a>
-                            </div>
-                            <div class="nav-item d-none d-md-flex">
-                                <a href="twitter.com" class="btn btn-primary">Primary</a>
-                            </div>
-                        </div>
-                        <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
-                            <span class="header-toggler-icon"></span>
-                        </a>
-                    </div>
+                <div class="d-flex">
+            <a class="header-brand" href="<?php echo base_url();?>">
+            <img src="<?php echo base_url();?>assets/images/TicketAsiap.svg" class="header-brand-img" style="width:130px;" alt="asiap logo">
+            </a>
+            <div class="d-flex order-lg-2 ml-auto">
+              <div class="nav-item d-none d-md-flex">
+                <a href="<?php echo site_url('home/ticketlist')?>" class="btn btn-primary">Tiket Saya</a>
+              </div>
+              <div class="dropdown">
+                  <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+                    <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
+                    <span class="ml-2 d-none d-lg-block">
+                      <span class="text-default"><?php echo $this->session->userdata('ses_fullname')?></span>
+                      <small class="text-muted d-block mt-1"><?php echo $this->session->userdata('ses_email')?></small>
+                    </span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="<?php echo site_url('home/logout');?>">
+                      <i class="dropdown-icon fe fe-log-out"></i> Sign out
+                    </a>
+                  </div>
+                </div>
+            </div>
+            <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+              <span class="header-toggler-icon"></span>
+            </a>
+          </div>
                 </div>
             </div> 
             <div class="my-3 my-md-5">
@@ -92,7 +99,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Nama Lengkap</label>
-                                                    <input type="text" class="form-control" placeholder="Nama Lengkap">
+                                                    <input type="text" class="form-control" disabled placeholder="<?php echo $this->session->userdata('ses_fullname')?>">
                                                     <p class="text-muted">Sesuai KTP/paspor/SIM (tanpa tanda baca atau gelar)</p>
                                                 </div>
                                             </div>
@@ -103,7 +110,7 @@
                                                         <span class="input-group-prepend" id="basic-addon1">
                                                             <span class="input-group-text">+62</span>
                                                         </span>
-                                                        <input type="text" class="form-control" placeholder="Nomer Handphone" aria-label="Nomer Handphone" aria-describedby="basic-addon1">
+                                                        <input type="text" class="form-control" disabled placeholder="<?php echo $this->session->userdata('ses_handphone')?>" aria-label="Nomer Handphone" aria-describedby="basic-addon1">
                                                     </div>
                                                     <p class="text-muted">Contoh: +62812345678, untuk Kode Negara (+62) dan No. Handphone 0812345678</p>
                                                 </div>
@@ -111,7 +118,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" placeholder="Email">
+                                                    <input type="email" class="form-control" disabled placeholder="<?php echo $this->session->userdata('ses_email')?>">
                                                     <p class="text-muted">Contoh: email@example.com</p>
                                                 </div>
                                             </div>
