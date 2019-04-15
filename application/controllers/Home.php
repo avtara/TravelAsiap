@@ -13,6 +13,8 @@ class Home extends CI_Controller {
 	{
 		$data['rute'] = $this->M_Home->rute_from();
 		$data['rute_to'] = $this->M_Home->rute_to();
+		$this->session->set_userdata('referred_from', current_url());
+		
 		
 		if($this->session->userdata('ses_level')=='1'){
 			$this->load->view('pessanger/logged/index',$data);
@@ -21,8 +23,12 @@ class Home extends CI_Controller {
 		}
 	}
 	public function result(){
+		$currentURL = current_url(); 
+		$params   = $_SERVER['QUERY_STRING']; 
+		$fullURL = $currentURL . '?' . $params; 
 		$data['rute'] = $this->M_Home->search();
 		$data['remains'] = $this->M_Home->remains();
+		$this->session->set_userdata('referred_from', $fullURL);
 
 		if($this->session->userdata('ses_level')=='1'){
 			$this->load->view('pessanger/logged/v_ticket',$data);
@@ -32,15 +38,27 @@ class Home extends CI_Controller {
 	}
 
 	public function user_booking(){
-		// $data['rute'] = $this->M_Home->search();
-		// $data['remains'] = $this->M_Home->remains();
-		
+		$currentURL = current_url(); 
+		$params   = $_SERVER['QUERY_STRING']; 
+		$fullURL = $currentURL . '?' . $params; 
+		$this->session->set_userdata('referred_from', $fullURL);
+		$data['book'] = $this->M_Home->view_booking();
+		$data['customer'] = $this->M_Home->kode_cust();
+		$data['seat'] = $this->M_Home->view_seat(); 
 		if($this->session->userdata('ses_level')=='1'){
-			$this->load->view('pessanger/v_reservation');	
+			$this->load->view('pessanger/v_reservation',$data);	
 		}else{
 			redirect(site_url('home/login'));
-		}
+		}	 
+	}
+
+	public function booking(){
 		
+		$data=array();
+		$this->M_Home->booking();
+		// $this->Home_Model->add_cust();
+		$kode = $this->input->post('reservation_code[0]');
+		redirect('/Home/payment/'.$kode,'refresh');
 	}
 
 	public function login()
@@ -70,7 +88,8 @@ class Home extends CI_Controller {
 					$this->session->set_userdata('ses_level',$data['level']);
 					$this->session->set_userdata('ses_email',$data['email']);
 					$this->session->set_userdata('ses_handphone',$data['handphone']);
-					redirect('home/index');
+					$referred_from = $this->session->userdata('referred_from');
+redirect($referred_from, 'refresh');
 				}else{ 
 					$this->session->set_userdata('akses','2');
 					$this->session->set_userdata('ses_id',$data['username']);

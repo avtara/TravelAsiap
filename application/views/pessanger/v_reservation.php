@@ -136,7 +136,9 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form>
+				
+
+                                    <form> 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -215,8 +217,6 @@
             </div>
         </div>
     </div>
-    
-    
 </div>
 <footer class="footer">
     <div class="container">
