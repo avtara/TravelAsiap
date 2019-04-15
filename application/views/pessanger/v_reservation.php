@@ -127,67 +127,157 @@
                                 </div>
                                 
                             </div>
-                            <div class="card">
+
+				<?php  // cek buat user terbesar
+				$usr = $customer->id_customer;
+				$newus = substr($usr,1,4);
+
+				$tambah=$newus+1;
+				if ($tambah<10) {
+					$id="C000".$tambah;
+				}
+				elseif ($tambah<100) {
+					$id="C00".$tambah;
+				}
+				else if($tambah<1000){
+					$id="C0".$tambah;
+				}
+				else{
+					$id="C".$tambah;
+				} ?>
+				<?php $kursi = []; ?>
+				<?php foreach ($seat as $data) {
+					$kursi[] = $data->seat_code;
+				} ?>
+				<?php $penumpang = $this->input->get('penumpang'); $harga = $penumpang * $book->price; for ($i=1; $i <= $penumpang ; $i++) {  ?>
+				<form method="post" action="<?php echo site_url('/Home/booking/') ?>" class="booking">
+					<?php 
+					$date = date("Y-m-d"); 
+					$at = date("H:i:sa");
+					$id_user = $this->session->userdata('ses_id');
+					$rcode = $id_user.date("Ymds");
+					
+					$new_id = $id++;
+					echo($rcode);
+					?>
+					<input type="hidden" name="reservation_code[]" value="<?php echo $rcode ?>">
+					<input type="hidden" name="reservation_at[]" value="<?php echo $at ?>">
+					<input type="hidden" name="reservation_date[]" value="<?php echo $date ?>">
+					<input type="hidden" name="id_customer[]" value="<?php echo $new_id ?>">
+					<input type="hidden" name="id_rute[]" value="<?php echo $book->id_rute ?>">
+					<input type="hidden" name="depart_at[]" value="<?php echo $book->depart_at ?>">
+					<input type="hidden" name="id_transportation[]" value="<?php echo $book->id_transportation ?>">
+					<input type="hidden" name="price[]" value="<?php echo $harga ?>">
+					<input type="hidden" name="id_user[]" value="<?php echo $id_user ?>">
+					<input type="hidden" name="penumpang" value="<?php echo $penumpang ?>">
+                    <div class="card">
                                 <div class="card-status bg-blue"></div>
                                 <div class="card-header">
-                                    <h3 class="card-title">Dewasa 1</h3>
+                                    <h3 class="card-title">Dewasa <?php echo "0".$i; ?></h3>
                                     <div class="card-options">
                                         <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
                                     </div>
                                 </div>
                                 <div class="card-body">
-				
-
-                                    <form> 
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                <div class="row">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Title</label>
-                                                    <select class="form-control custom-select">
-                                                        <option value="">Tuan</option>
-                                                        <option value="">Nyonya</option>
-                                                        <option value="">Nona</option>
-                                                    </select>
-                                                    <p class="text-muted">Contoh: email@example.com</p>
+                                                    <label class="form-label">Nama Lengkap</label>
+                                                    <input type="text" id="first_name" name="name[]" class="form-control" placeholder="Masukan Nama Anda" required>
+                                                    <p class="text-muted">Sesuai KTP/paspor/SIM (tanpa tanda baca atau gelar)</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Nama Lengkap</label>
-                                                    <input type="text" class="form-control" placeholder="Nama Lengkap">
-                                                    <p class="text-muted">Sesuai KTP/paspor/SIM (tanpa tanda baca atau gelar)</p>
+                                                    <label class="form-label">Alamat</label>
+                                                    <input type="text" id="last_name" name="address[]" class="form-control" placeholder="Masukan Alamat Anda" required>
+                                                    <p class="text-muted">Sesuai dengan Alamat di tanda pengenal</p>
                                                 </div>
                                             </div>
-                                            
-                                            <div class="col-md-8">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">Email</label>
-                                                    <select name="beast" id="select-beast" class="form-control custom-select">
-                                                        <option value="1">Chuck Testa</option>
-                                                        <option value="4">Sage Cattabriga-Alosa</option>
-                                                        <option value="3">Nikola Tesla</option>
-                                                    </select>
-                                                    <p class="text-muted">Contoh: email@example.com</p>
+                                                    <label class="form-label">Nomer Hp</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-prepend" id="basic-addon1">
+                                                            <span class="input-group-text">+62</span>
+                                                        </span>
+                                                        <input type="text" id="email" name="phone[]" class="form-control"  placeholder="8xxx xxxx xxxx" aria-label="Nomer Handphone" aria-describedby="basic-addon1">
+                                                    </div>
+                                                    <p class="text-muted">Contoh: +62812345678, untuk Kode Negara (+62) dan No. Handphone 0812345678</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">Jenis Kelamin</label>
+                                                    <select name="gender[]"class="form-control">
+									<option value="laki-laki">Laki - laki</option>
+									<option value="perempuan">Perempuan</option>
+								</select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">No Identitas</label>
+                                                    <input type="text"  name="identitas[]" class="form-control" placeholder="Masukan No Identitas Anda" required>
+                                                    <p class="text-muted">Sesuai KTP/paspor/SIM (tanpa tanda baca atau gelar)l</p>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
+						
+						<?php } ?>
+						<!-- <h3>Pilih Tempat Duduk</h3>
+						<?php for ($i=1; $i <= $penumpang ; $i++) { ?>
+						<div class="customer-name">
+							<table>
+								<tr>
+									<td>
+										<div onclick="pget(this.id)" id="p<?php echo$i ?>" class="customer-color id-1"></div>
+									</td>
+									<td>
+										<h6>Penumpang <?php echo $i ?></h6>
+									</td>
+									<td>
+										<input id="i<?php echo$i ?>" type="text" readonly name="seat_code[]">
+									</td>
+								</tr>
+							</table>
+						</div>
+						<?php } ?> -->
+
+						<div class="seat">
+							<?php  for ($j=1; $j <= $book->seat_qty; $j++) {?>
+							<?php if (in_array($j, $kursi)) { ?>
+							<div id="<?php echo $j; ?>" class="seat-id seat-notavailabe"><p><!-- <?php echo $j; ?> --></p></div>
+							<?php }else{ ?>
+							<div onclick="sget(this.id)" id="<?php echo $j; ?>" class="seat-id"><p><!-- <?php echo $j; ?> --></p></div>
+							<?php } ?>
+							<?php } ?>
+						</div>
+
+
+						<input type="hidden" name="id_t" value="<?php echo $book->id_transportation; ?>">
+						
+					
+				
+
+                            
+                            
                         </div>
                         <div class="col-md-6 col-xl-4">
                             <div class="card">
                                 <div class="card-header">
                                     <i class="fa fa-plane" style="color:#319fff;">    </i> 
-                                    <h3 class="card-title">&nbsp Jakarta → Bali / Denpasar</h3>
+                                    <h3 class="card-title">&nbsp <?php echo strstr($this->input->get('rute_from'),'(', true)?> → <?php echo strstr($this->input->get('rute_to'),'(', true)?></h3>
                                     <div class="card-options">
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <h6 class="card-title">Departure • Fri, 12 Apr 2019</h6>
+                                    <h6 class="card-title">Departure • <?php echo date("D, d M Y ",strtotime($_GET['depart_at']))?></h6>
                                     <div class="row">
                                         <div class="col-8">
-                                            <strong>Lion Air</strong>
+                                            <strong><?php echo $book->armada ?></strong>
                                             <p class="text-muted mb-0">Direct</p>
                                         </div>
                                         <div class="col-4">
@@ -195,13 +285,13 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-3">
-                                            <strong>08:20</strong>
-                                            <p class="text-muted mb-0">Jakarta</p>
+                                        <div class="col-4">
+                                            <strong><?php echo gmdate("H:i",strtotime($book->depart_at));  ?></strong>
+                                            <p class="text-muted mb-0"><?php echo strstr($this->input->get('rute_from'),'(', true)?></p>
                                         </div>
-                                        <div class="col-3">
-                                            <strong>08:20</strong>
-                                            <p class="text-muted mb-0">Denpasar</p>
+                                        <div class="col-4">
+                                            <strong><?php echo gmdate("H:i",strtotime($book->arrival));  ?></strong>
+                                            <p class="text-muted mb-0"><?php echo strstr($this->input->get('rute_to'),'(', true)?></p>
                                         </div>
                                     </div>
                                 </br>
@@ -209,8 +299,8 @@
                                 <i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Direct
                             </div>
                         </div>
-                        <button type="button" class="btn btn-success btn-block">Lanjutkan</button>
-
+                        <input type="submit" class="btn btn-success  btn-block" value="Lanjutkan"/>
+                        </form>
                     </div>
                 </div>  
                 
