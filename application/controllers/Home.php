@@ -60,6 +60,43 @@ class Home extends CI_Controller {
 		$kode = $this->input->post('reservation_code[0]');
 		redirect('/Home/payment/'.$kode,'refresh');
 	}
+	
+	public function send_payment(){
+		$data=array();
+		$this->M_Home->send_payment();
+
+		redirect('/Home/setting/'.$this->session->userdata('ses_id'),'refresh');
+	}
+
+	//payment
+	public function payment($kode){
+		$data['payment'] = $this->M_Home->payment($kode);
+		$data['penumpang'] = $this->M_Home->hitung_penumpang($kode);
+		if($this->session->userdata('ses_level')=='1'){
+			$this->load->view('pessanger/payment', $data);
+		}else{
+			redirect('home');
+		}	
+		
+	}
+
+	public function print_tiket(){
+			
+		$data['reservation'] = $this->M_Home->print_tiket();
+		if($this->session->userdata('ses_level')=='1'){
+			$this->load->view('/pessanger/print', $data);
+		}else{
+			redirect('home');
+		}	
+		
+	}
+
+	public function setting($ids){
+		if($ids!=$this->session->userdata('ses_id')){redirect('home/setting/'.$this->session->userdata('ses_id'));};
+		$data['reservation']=$this->M_Home->setting($ids);
+		$this->load->view('/pessanger/ticketlist',$data);
+
+	}
 
 	public function login()
 	{
@@ -116,31 +153,32 @@ redirect($referred_from, 'refresh');
 		$this->form_validation->set_rules('username', 'Username', 'required|min_length[2]|max_length[20]', array('required'=>'Username masih kosong !','min_length'=>'Minimal Karakter adalah 2!','max_length'=>'Maksimal Karakter hanya 12'));
 		$this->form_validation->set_rules('fullname', 'Fullname', 'required',array('required'=>'Nama Panjang masih kosong !'));
 		$this->form_validation->set_rules('password', 'Password','required|min_length[6]',array('required'=>'Password masih kosong !','min_length'=>'Minimal Karakter adalah 6!'));
-
+		$data['user'] = $this->M_Home->kode();
 
 
 		if ($this->form_validation->run() == FALSE)
 		{
-			$this->load->view('index/register');
+			$this->load->view('pessanger/register',$data);
 		}else
 		{
 			$data = array(
+				'id_user' => $this->input->post('id_user'),
 				"username"=>$this->input->post("username"),
 				"fullname"=>$this->input->post("fullname"),
 				"password"=>md5($this->input->post("password")),
-				"level"=>2
+				"level"=>1	
 			);
-			$this->user_m->add($data);
+			$this->M_Home->add($data);
 			$this->session->set_flashdata('msg', '<div class="alert alert-success alert-dismissible" >
 				<button data-dismiss="alert" class="close"></button>
 				<h4>Berhasil</h4>
 				<p>
-				Anda telah berhasil register ke situs TravelID, silahkan login  💗
+				Anda telah berhasil register ke situs TravelAsiap, silahkan login  💗
 				</p>
 				<div class="btn-list">
 				</div>
 				</div>');
-			redirect('welcome/register');
+			redirect('home/register');
 		}
 	}
 

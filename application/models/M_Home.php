@@ -36,30 +36,30 @@
 			return $this->db->get()->row();
 		}
 
-		// function payment($kode){
-		// 	$this->db->select('*');
-		// 	$this->db->from('reservation');
-		// 	$this->db->where('reservation_code', $kode);
-		// 	$this->db->join('rute', 'reservation.id_rute = rute.id_rute');
-		// 	$this->db->join('transportation', 'reservation.id_transportation = transportation.id_transportation');
-		// 	return $this->db->get()->row();
-		// }
+		function payment($kode){
+			$this->db->select('*');
+			$this->db->from('reservation');
+			$this->db->where('reservation_code', $kode);
+			$this->db->join('rute', 'reservation.id_rute = rute.id_rute');
+			$this->db->join('transportation', 'reservation.id_transportation = transportation.id_transportation');
+			return $this->db->get()->row();
+		}
 
-		// function hitung_penumpang($kode){
-		// 	$this->db->select('count(*) AS "penumpang"');
-		// 	$this->db->from('reservation');
-		// 	$this->db->where('reservation_code', $kode);
-		// 	return $this->db->get()->row();
-		// }
+		function hitung_penumpang($kode){
+			$this->db->select('count(*) AS "penumpang"');
+			$this->db->from('reservation');
+			$this->db->where('reservation_code', $kode);
+			return $this->db->get()->row();
+		}
 
-		// function send_payment(){
-		// 	$data=array(
-		// 		'price' => $this->input->post('price'),
-		// 		'status' => 2
-		// 	);
-		// 	$this->db->where('reservation_code', $this->input->post('rcode'));
-		// 	$this->db->update('reservation', $data);
-		// }
+		function send_payment(){
+			$data=array(
+				'price' => $this->input->post('price'),
+				'status' => 3
+			);
+			$this->db->where('reservation_code', $this->input->post('rcode'));
+			$this->db->update('reservation', $data);
+		}
 
 		function view_booking(){
 			$this->db->select('*');
@@ -117,29 +117,33 @@
 			return $this->db->get('customer')->row();
 		}
 
-		// function setting($config, $ids){
-		// 	$this->db->select('*');
-		// 	$this->db->where('id_user', $ids);
-		// 	$this->db->join('rute',  'reservation.id_rute = rute.id_rute');
-		// 	$this->db->join('customer', 'reservation.id_customer = customer.id_customer');
-		// 	$this->db->order_by('id_reservation', 'desc');
-		// 	$hasilquery=$this->db->get('reservation', $config['per_page'], $this->uri->segment(4));
+		function setting($ids){
+			$this->db->select('*');
+			$this->db->where('id_user', $ids);
+			$this->db->join('rute',  'reservation.id_rute = rute.id_rute');
+			$this->db->join('customer', 'reservation.id_customer = customer.id_customer');
+			$this->db->order_by('id_reservation', 'desc');
+			return $this->db->get('reservation')->result_array();
 
-		// 	if ($hasilquery->num_rows() > 0) {
-		// 		foreach($hasilquery->result() as $value){
-		// 			$data[]=$value;
-		// 		}
-		// 		return $data;
-		// 	}
-		// }
 
-		// function print_tiket(){
-		// 	$id_customer = $this->input->post('cust');
-		// 	$this->db->select('*');
-		// 	$this->db->from('reservation');
-		// 	$this->db->where('customer.id_customer', $id_customer);
-		// 	$this->db->join('customer', 'reservation.id_customer = customer.id_customer');
-		// 	$this->db->join('rute', 'reservation.id_rute = rute.id_rute');
-		// 	return $this->db->get()->row();
-		// }
+		}
+
+		function print_tiket(){
+			$id_customer = $this->input->post('cust');
+			$this->db->select('*');
+			$this->db->from('reservation');
+			$this->db->where('customer.id_customer', $id_customer);
+			$this->db->join('customer', 'reservation.id_customer = customer.id_customer');
+			$this->db->join('rute', 'reservation.id_rute = rute.id_rute');
+			return $this->db->get()->row();
+		}
+
+		function add($data)
+	{
+		$this->db->insert("user",$data);
+	}
+	function kode(){
+		$this->db->select_max('id_user');
+		return $this->db->get('user')->row();
+	}
 	}

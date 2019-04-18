@@ -45,7 +45,7 @@
             </a>
             <div class="d-flex order-lg-2 ml-auto">
               <div class="nav-item d-none d-md-flex">
-                <a href="<?php echo site_url('home/ticketlist')?>" class="btn btn-primary">Tiket Saya</a>
+                <a href="<?php echo site_url('home/setting/')?><?php echo $this->session->userdata('ses_id')?>" class="btn btn-primary">Tiket Saya</a>
               </div>
               <div class="dropdown">
                   <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">

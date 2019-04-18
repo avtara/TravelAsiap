@@ -67,7 +67,7 @@
                 </div>
               </form>
               <div class="text-center text-muted">
-                Don't have account yet? <a href="<?php echo base_url();?>register.html">Sign up</a>
+                Don't have account yet? <a href="<?php echo site_url('home/register')?>">Sign up</a>
               </div>
             </div>
           </div>
