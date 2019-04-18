@@ -111,7 +111,10 @@
                     <div class="col-sm-8">
                       <div class="form-group">
                         <span class="form-label">Tanggal Keberangkatan</span>
-                        <input class="form-control" type="date" name="depart_at" required>
+                        <input class="form-control" id="datepicker" min="<?php
+         echo date('Y-m-d');
+     ?>" type="date" name="depart_at" required>
+                        
                       </div>
                     </div>
                   </div>
@@ -155,5 +158,7 @@
       </div>
     </footer>
   </div>
+
+  
 </body>
 </html> 
