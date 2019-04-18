@@ -166,7 +166,9 @@ redirect($referred_from, 'refresh');
 				"username"=>$this->input->post("username"),
 				"fullname"=>$this->input->post("fullname"),
 				"password"=>md5($this->input->post("password")),
-				"level"=>1	
+				"level"=>1,
+				"email"=>"client@asiap.dong",
+				"handphone"=>"082138432832"		
 			);
 			$this->M_Home->add($data);
 			$this->session->set_flashdata('msg', '<div class="alert alert-success alert-dismissible" >

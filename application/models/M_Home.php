@@ -81,6 +81,11 @@
 		}
 
 		function booking(){
+
+			$this->db->set('seat_qty', 'seat_qty'.-$this->input->post('penumpang'), FALSE);
+			$this->db->where('id_transportation', $this->input->post('id_transportation[0]'));
+			$this->db->update('transportation');
+
 			for ($i=0; $i < $this->input->post('penumpang') ; $i++) { 
 				
 				$data=array(
@@ -109,6 +114,7 @@
 				);
 
 				$this->db->insert('customer', $cust);
+
 			}
 		}
 

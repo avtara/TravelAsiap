@@ -152,7 +152,15 @@
                                                 <input type="hidden" name="penumpang" value="<?php echo $this->input->get('penumpang') ?>">
                                                 <?php $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
                                                 <input type="hidden" name="url" value="<?php echo($url); ?>">
-                                                <button type="submit" class="btn btn-primary btn-block" data-toggle="tooltip" title="Tersedia <?php echo $rute->seat_qty?> Penumpang">Beli</button>
+                                                <?php 
+                                                 $seat_qty=$rute->seat_qty?>
+                                                 <?php if ($seat_qty>=$this->input->get('penumpang')): ?>
+                                                 <button type="submit" class="btn btn-primary btn-block" data-toggle="tooltip" title="Tersedia <?php echo $rute->seat_qty?> Penumpang">Beli</button>
+								                <?php endif ?>
+								                <?php if ($seat_qty<$this->input->get('penumpang')): ?>
+                                                
+                                                <button type="submit" class="btn btn-primary btn-block" disabled data-toggle="tooltip">Habis</button>
+								                <?php endif ?>
                                             </center>
                                         </td>
 							<?php } ?>
