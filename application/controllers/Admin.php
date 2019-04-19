@@ -14,12 +14,20 @@ class Admin extends CI_Controller {
         $data['akun'] = $this->M_Admin->count_akun();
         $data['customer'] = $this->M_Admin->count_customer();
         $data['transportation'] = $this->M_Admin->count_transportation();
-		// $data['rute_to'] = $this->M_Home->rute_to();
-		// $this->session->set_userdata('referred_from', current_url());
 		
 		
 		if($this->session->userdata('ses_level')=='2'){
 			$this->load->view('admin/index',$data);
+		}else{
+			redirect('home');
+		}
+    }
+    public function ticket()
+	{
+        // $data['rute'] = $this->M_Admin->count_rute();
+		
+		if($this->session->userdata('ses_level')=='2'){
+			$this->load->view('admin/v_ticket');
 		}else{
 			redirect('home');
 		}
