@@ -128,12 +128,15 @@ class Home extends CI_Controller {
 					$this->session->set_userdata('ses_handphone',$data['handphone']);
 					$referred_from = $this->session->userdata('referred_from');
 redirect($referred_from, 'refresh');
-				}else{ 
-					$this->session->set_userdata('akses','2');
-					$this->session->set_userdata('ses_id',$data['username']);
-					$this->session->set_userdata('ses_nama',$data['fullname']);
+				}if($data['level']=='2'){ 
+					$this->session->set_userdata('ses_id',$data['id_user']);
+					$this->session->set_userdata('ses_fullname',$data['fullname']);
 					$this->session->set_userdata('ses_level',$data['level']);
-					redirect('home/index');
+					$this->session->set_userdata('ses_email',$data['email']);
+					$this->session->set_userdata('ses_handphone',$data['handphone']);
+					redirect('admin/index');
+				}else{
+					echo 3;
 				}
 			}else{$this->session->set_flashdata('msg', '<div class="alert alert-icon alert-danger" role="alert">
 				<i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> <b>Username</b> atau <b>Password</b> anda salah, silahkan coba lagi!

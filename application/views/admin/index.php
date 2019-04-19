@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Shards Dashboard Lite - Free Bootstrap Admin Template – DesignRevision</title>
+    <title>Admin Panel TravelAshiap</title>
     <meta name="description" content="A high-quality &amp; free Bootstrap admin dashboard template pack that comes with lots of templates and components.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="styles/shards-dashboards.1.1.0.min.css">
-    <link rel="stylesheet" href="styles/extras.1.1.0.min.css">
+    <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="<?php echo base_url()?>assets/admin/styles/shards-dashboards.1.1.0.min.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>assets/admin/styles/extras.1.1.0.min.css">
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </head>
   <body class="h-100">
@@ -24,8 +24,7 @@
             <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
               <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
                 <div class="d-table m-auto">
-                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/shards-dashboards-logo.svg" alt="Shards Dashboard">
-                  <span class="d-none d-md-inline ml-1">Shards Dashboard</span>
+                  <img src="<?php echo base_url();?>assets/images/TicketAsiap.svg" class="header-brand-img" style="width:130px;" alt="asiap logo">
                 </div>
               </a>
               <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
@@ -37,17 +36,17 @@
             <div class="input-group input-group-seamless ml-3">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <i class="fas fa-search"></i>
+                  
                 </div>
               </div>
-              <input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search"> </div>
+               </div>
           </form>
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link active" href="index.html">
-                  <i class="material-icons">edit</i>
-                  <span>Blog Dashboard</span>
+                  <i class="material-icons">view_module</i>
+                  <span>Asiap Dashboard</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -98,21 +97,20 @@
                 <div class="input-group input-group-seamless ml-3">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
-                      <i class="fas fa-search"></i>
+                      
                     </div>
                   </div>
-                  <input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search"> </div>
+                   </div>
               </form>
               <ul class="navbar-nav border-left flex-row ">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
-                    <span class="d-none d-md-inline-block">Sierra Brooks</span>
+                    <span class="d-none d-md-inline-block"><?php echo $this->session->userdata('ses_fullname');?><br><?php echo $this->session->userdata('ses_fullname');?></span>
                     
                   </a>
                   <div class="dropdown-menu dropdown-menu-small">
 
-                    <a class="dropdown-item text-danger" href="#">
+                    <a class="dropdown-item text-danger" href="<?php echo site_url('home/logout');?>">
                       <i class="material-icons text-danger">&#xE879;</i> Logout </a>
                   </div>
                 </li>
@@ -142,7 +140,7 @@
                     <div class="d-flex flex-column m-auto">
                       <div class="stats-small__data text-center">
                         <span class="stats-small__label text-uppercase">Akun</span>
-                        <h6 class="stats-small__value count my-3">2,390</h6>
+                        <h6 class="stats-small__value count my-3"><?php echo $akun?></h6>
                       </div>
                       <div class="stats-small__data">
                       </div>
@@ -157,7 +155,7 @@
                     <div class="d-flex flex-column m-auto">
                       <div class="stats-small__data text-center">
                         <span class="stats-small__label text-uppercase">rute</span>
-                        <h6 class="stats-small__value count my-3">182</h6>
+                        <h6 class="stats-small__value count my-3"><?php echo $rute?></h6>
                       </div>
                       
                     </div>
@@ -171,7 +169,7 @@
                     <div class="d-flex flex-column m-auto">
                       <div class="stats-small__data text-center">
                         <span class="stats-small__label text-uppercase">pelanggan</span>
-                        <h6 class="stats-small__value count my-3">8,147</h6>
+                        <h6 class="stats-small__value count my-3"><?php echo $customer?></h6>
                       </div>
                     </div>
                     <canvas height="120" class="blog-overview-stats-small-3"></canvas>
@@ -184,7 +182,7 @@
                     <div class="d-flex flex-column m-auto">
                       <div class="stats-small__data text-center">
                         <span class="stats-small__label text-uppercase">transportation</span>
-                        <h6 class="stats-small__value count my-3">2,413</h6>
+                        <h6 class="stats-small__value count my-3"><?php echo $transportation?></h6>
                       </div>
                     </div>
                     <canvas height="120" class="blog-overview-stats-small-4"></canvas>
@@ -196,7 +194,7 @@
             
           </div>
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
-            <ul class="nav">
+            <!-- <ul class="nav">
               <li class="nav-item">
                 <a class="nav-link" href="#">Home</a>
               </li>
@@ -212,9 +210,8 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Blog</a>
               </li>
-            </ul>
-            <span class="copyright ml-auto my-auto mr-2">Copyright © 2018
-              <a href="https://designrevision.com" rel="nofollow">DesignRevision</a>
+            </ul> -->
+            <span class="copyright ml-auto my-auto mr-2">Copyright © 
             </span>
           </footer>
         </main>
@@ -226,8 +223,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
-    <script src="scripts/extras.1.1.0.min.js"></script>
-    <script src="scripts/shards-dashboards.1.1.0.min.js"></script>
-    <script src="scripts/app/app-blog-overview.1.1.0.js"></script>
+    <script src="<?php echo base_url()?>assets/admin/scripts/extras.1.1.0.min.js"></script>
+    <script src="<?php echo base_url()?>assets/admin/scripts/shards-dashboards.1.1.0.min.js"></script>
+    <script src="<?php echo base_url()?>assets/admin/scripts/app/app-blog-overview.1.1.0.js"></script>
   </body>
 </html>
