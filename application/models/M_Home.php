@@ -98,7 +98,7 @@
 					'depart_at' => $this->input->post('depart_at['.$i.']'),
 					'price' => $this->input->post('price['.$i.']'),
 					'id_user' => $this->input->post('id_user['.$i.']'),
-					// 'seat_code' => $this->input->post('seat_code['.$i.']'),
+					'seat_code' => $this->input->post('seat_code['.$i.']'),
 					'status' => 0
 				);
 
@@ -121,6 +121,12 @@
 		function kode_cust(){
 			$this->db->select_max('id_customer');
 			return $this->db->get('customer')->row();
+		}
+
+		function kode_seat( $code){
+			$this->db->select_max('seat_code');
+			$this->db->where('id_rute', $code);
+			return $this->db->get('reservation')->row();
 		}
 
 		function setting($ids){

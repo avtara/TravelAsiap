@@ -129,9 +129,8 @@
                             </div>
 
 				<?php  // cek buat user terbesar
-				$usr = $customer->id_customer;
+                $usr = $customer->id_customer;
 				$newus = substr($usr,1,4);
-
 				$tambah=$newus+1;
 				if ($tambah<10) {
 					$id="C000".$tambah;
@@ -144,7 +143,29 @@
 				}
 				else{
 					$id="C".$tambah;
-				} ?>
+                } ?>
+                <?php  // cek buat user terbesar
+                $this->db->select_max('seat_code');
+			    $this->db->where('id_rute', $book->id_rute);
+                $cod = $this->db->get('reservation')->row();
+                $newcod=$cod->seat_code++;
+                // $cod = $seat_code->seat_code;
+				// $tambahin=$newcod+1;
+				// if ($tambah<10) {
+				// 	$cod="A000".$tambahin;
+				// }
+				// elseif ($tambah<100) {
+				// 	$cod="B00".$tambahin;
+				// }
+				// else if($tambah<1000){
+				// 	$cod="C0".$tambahin;
+				// }
+				// else{
+				// 	$cod="D".$tambahin;
+                // } 
+                
+                ?>
+                
 				<?php $kursi = []; ?>
 				<?php foreach ($seat as $data) {
 					$kursi[] = $data->seat_code;
@@ -156,7 +177,7 @@
 					$at = date("H:i:sa");
 					$id_user = $this->session->userdata('ses_id');
 					$rcode = $id_user.date("Ymds");
-					
+                    $newcod=$cod->seat_code++;
 					$new_id = $id++;
 					// echo($rcode);
 					?>
@@ -167,7 +188,8 @@
 					<input type="hidden" name="id_rute[]" value="<?php echo $book->id_rute ?>">
 					<input type="hidden" name="depart_at[]" value="<?php echo $book->depart_at ?>">
 					<input type="hidden" name="id_transportation[]" value="<?php echo $book->id_transportation ?>">
-					<input type="hidden" name="price[]" value="<?php echo $harga ?>">
+                    <input type="hidden" name="price[]" value="<?php echo $harga ?>">
+                    <input type="hidden" name="seat_code[]" value="<?php echo $newcod ?>">
 					<input type="hidden" name="id_user[]" value="<?php echo $id_user ?>">
 					<input type="hidden" name="penumpang" value="<?php echo $penumpang ?>">
                     <div class="card">

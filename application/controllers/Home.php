@@ -40,10 +40,11 @@ class Home extends CI_Controller {
 	public function user_booking(){
 		$currentURL = current_url(); 
 		$params   = $_SERVER['QUERY_STRING']; 
-		$fullURL = $currentURL . '?' . $params; 
+		$fullURL = $currentURL . '?' . $params;  
 		$this->session->set_userdata('referred_from', $fullURL);
 		$data['book'] = $this->M_Home->view_booking();
 		$data['customer'] = $this->M_Home->kode_cust();
+		// $data['seat_code'] = $this->M_Home->kode_seat();
 		$data['seat'] = $this->M_Home->view_seat(); 
 		if($this->session->userdata('ses_level')=='1'){
 			$this->load->view('pessanger/v_reservation',$data);	
