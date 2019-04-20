@@ -112,50 +112,71 @@
               </h1>
               <div class="col-12">
                 <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Invoices</h3>
-                  </div>
                   <div class="table-responsive">
-                    <table class="table card-table table-vcenter text-nowrap datatables">
+                    <table class="table card-table table-vcenter text-nowrap" id="datatables">
                       <thead>
                         <tr>
                           <th class="w-1">No.</th>
-                          <th>Invoice Subject</th>
+                          <th>Pemesanan</th>
                           <th>Client</th>
-                          <th>VAT No.</th>
-                          <th>Created</th>
+                          <th>Armada</th>
+                          <th>Dari</th>
+                          <th>Menuju</th>
+                          <th>Berangkat </th>
+                          <th>Sampai</th>
                           <th>Status</th>
-                          <th>Price</th>
-                          <th></th>
-                          <th></th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td><span class="text-muted">001401</span></td>
-                          <td><a href="invoice.html" class="text-inherit">Design Works</a></td>
+                      <?php foreach ($ticket as $ticket): ?>
+                      <tr>
+                          <td><span class="text-muted"><?php echo $ticket['reservation_code']?></span></td>
+                          <td><?php echo date("D, d M Y", strtotime($ticket['reservation_date']));?></td>
                           <td>
-                            Carlson Limited
+                          <?php echo $ticket['name']?>
                           </td>
                           <td>
-                            87956621
+                          <?php echo $ticket['armada']?>
                           </td>
                           <td>
-                            15 Dec 2017
+                          <?php echo strstr($ticket['rute_from'],'(', true)?>
                           </td>
                           <td>
-                            <span class="status-icon bg-success"></span> Paid
+                          <?php echo strstr($ticket['rute_to'],'(', true)?>
                           </td>
-                          <td>$887</td>
+                          <td>
+                          <?php echo date("H.i  d M Y", strtotime($ticket['depart_at']));?>
+                          </td>
+                          <td>
+                          <?php echo date("H.i  d M Y", strtotime($ticket['arrival']));?>
+                          </td>
+                          <td>
+                          <?php if($ticket['status']==0):?>
+                            <span class="status-icon bg-danger"></span> Belum
+                            <?php elseif($ticket['status']==2):?>
+                            <span class="status-icon bg-warning"></span> Menunggu
+                            <?php elseif($ticket['status']==3):?>
+                            <span class="status-icon bg-success"></span> Bayar
+                          <?php endif?>
+                          </td>
+                          
                           <td class="text-right">
-                            <a href="javascript:void(0)" class="btn btn-secondary btn-sm">Manage</a>
+                          <form  method="post" action="<?php echo site_url('admin/confirm'); ?>" >
+                          <input type="hidden" name="rcode" value="<?php echo $ticket['reservation_code'] ?>">
+                          <?php if($ticket['status']==2):?>
+                            <button type="submit" class="btn btn-secondary btn-sm">Konfirmasi</a>
+                          <?php endif?>
+                          </form>
                           </td>
                         </tr>
+                      <?php endforeach?>
+                        
                       </tbody>
                     </table>
                     <script>
                         $(document).ready(function() {
-                          $('.datatables').DataTable();
+                          $('#datatables').DataTable();
                         } );
                     </script>
                   </div>

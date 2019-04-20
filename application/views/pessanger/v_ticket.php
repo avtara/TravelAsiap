@@ -49,7 +49,7 @@
             </a>
             <div class="d-flex order-lg-2 ml-auto">
               <div class="nav-item d-none d-md-flex">
-                <a href="<?php echo site_url('home/signup')?>" class="btn btn-secondary">Daftar</a>
+                <a href="<?php echo site_url('home/register')?>" class="btn btn-secondary">Daftar</a>
               </div>
               <div class="nav-item d-none d-md-flex">
                 <a href="<?php echo site_url('home/login')?>" class="btn btn-primary">Masuk</a>

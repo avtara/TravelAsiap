@@ -120,37 +120,24 @@
                       <thead>
                         <tr>
                           <th class="w-1">No.</th>
-                          <th>Invoice Subject</th>
-                          <th>Client</th>
-                          <th>VAT No.</th>
-                          <th>Created</th>
-                          <th>Status</th>
-                          <th>Price</th>
-                          <th></th>
-                          <th></th>
+                          <th>Kode Armada</th>
+                          <th>Nama Armada</th>
+                          <th>Sisa Kursi</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td><span class="text-muted">001401</span></td>
-                          <td><a href="invoice.html" class="text-inherit">Design Works</a></td>
+                      <?php foreach ($transport as $transport): ?>                        <tr>
+                          <td><span class="text-muted"><?php echo $transport['id_transportation']?></span></td>
                           <td>
-                            Carlson Limited
-                          </td>
-                          <td>
-                            87956621
+                          <?php echo $transport['code']?>
                           </td>
                           <td>
-                            15 Dec 2017
+                          <?php echo $transport['armada']?>
                           </td>
                           <td>
-                            <span class="status-icon bg-success"></span> Paid
-                          </td>
-                          <td>$887</td>
-                          <td class="text-right">
-                            <a href="javascript:void(0)" class="btn btn-secondary btn-sm">Manage</a>
-                          </td>
+                          <?php echo $transport['seat_qty']?></td>
                         </tr>
+                        <?php endforeach?>
                       </tbody>
                     </table>
                     <script>

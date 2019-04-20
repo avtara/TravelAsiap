@@ -24,10 +24,10 @@ class Admin extends CI_Controller {
     }
     public function ticket()
 	{
-        // $data['rute'] = $this->M_Admin->count_rute();
+        $data['ticket'] = $this->M_Admin->ticket();
 		
 		if($this->session->userdata('ses_level')=='2'){
-			$this->load->view('admin/v_ticket');
+			$this->load->view('admin/v_ticket',$data);
 		}else{
 			redirect('home');
 		}
@@ -35,10 +35,10 @@ class Admin extends CI_Controller {
 
     public function transport()
 	{
-        // $data['rute'] = $this->M_Admin->count_rute();
+        $data['transport'] = $this->M_Admin->transport();
 		
 		if($this->session->userdata('ses_level')=='2'){
-			$this->load->view('admin/v_transport');
+			$this->load->view('admin/v_transport',$data);
 		}else{
 			redirect('home');
 		}
@@ -46,12 +46,19 @@ class Admin extends CI_Controller {
 
     public function rute()
 	{
-        // $data['rute'] = $this->M_Admin->count_rute();
+        $data['rute'] = $this->M_Admin->rute();
 		
 		if($this->session->userdata('ses_level')=='2'){
-			$this->load->view('admin/v_rute');
+			$this->load->view('admin/v_rute',$data);
 		}else{
 			redirect('home');
 		}
-    }
+	}
+	
+	public function confirm(){
+		$data=array();
+		$this->M_Admin->confirm();
+
+		redirect('/admin/ticket/','refresh');
+	}
 }
