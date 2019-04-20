@@ -17,7 +17,7 @@ class Admin extends CI_Controller {
 		
 		
 		if($this->session->userdata('ses_level')=='2'){
-			$this->load->view('admin/index',$data);
+			$this->load->view('admin/v_index',$data);
 		}else{
 			redirect('home');
 		}
@@ -28,6 +28,28 @@ class Admin extends CI_Controller {
 		
 		if($this->session->userdata('ses_level')=='2'){
 			$this->load->view('admin/v_ticket');
+		}else{
+			redirect('home');
+		}
+    }
+
+    public function transport()
+	{
+        // $data['rute'] = $this->M_Admin->count_rute();
+		
+		if($this->session->userdata('ses_level')=='2'){
+			$this->load->view('admin/v_transport');
+		}else{
+			redirect('home');
+		}
+    }
+
+    public function rute()
+	{
+        // $data['rute'] = $this->M_Admin->count_rute();
+		
+		if($this->session->userdata('ses_level')=='2'){
+			$this->load->view('admin/v_rute');
 		}else{
 			redirect('home');
 		}

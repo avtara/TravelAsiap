@@ -23,8 +23,6 @@
     <script src="<?php echo base_url();?>assets/js/vendors/bootstrap.bundle.min.js"></script>
     <!-- Dashboard Core -->
     <link href="<?php echo base_url()?>assets/css/dashboard.css" rel="stylesheet" />
-    <link href="<?php echo base_url()?>assets/plugins/DataTables/datatables.css" rel="stylesheet" />
-
     <script src="<?php echo base_url()?>assets/js/dashboard.js"></script>
     <!-- c3.js Charts Plugin -->
     <link href="<?php echo base_url()?>assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
@@ -35,7 +33,7 @@
     <!-- Input Mask Plugin -->
     <script src="<?php echo base_url()?>assets/plugins/input-mask/plugin.js"></script>
     <!-- Datatables Plugin -->
-    <script src="<?php echo base_url()?>assets/plugins/DataTables/datatables.js"></script>
+    <script src="<?php echo base_url()?>assets/plugins/datatables/plugin.js"></script>
   </head>
   <body class="">
     <div class="page">
@@ -76,16 +74,16 @@
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item">
-                    <a href="<?php echo site_url('admin')?>" class="nav-link"><i class="fe fe-home"></i> Home</a>
+                    <a href="<?php echo site_url('admin')?>" class="nav-link active"><i class="fe fe-home"></i> Home</a>
                   </li>
                   <li class="nav-item">
-                    <a href="javascript:void(0)" class="nav-link active" data-toggle="dropdown">Tiket</a>
+                    <a href="javascript:void(0)" class="nav-link " data-toggle="dropdown">Tiket</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
                       <a href="<?php echo site_url('admin/ticket')?>" class="dropdown-item ">List Tiket</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown">Transportasi</a>
+                    <a href="javascript:void(0)" class="nav-link " data-toggle="dropdown">Transportasi</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
                       <a href="<?php echo site_url('admin/transport')?>" class="dropdown-item ">Lihat Transportasi</a>
                       <a href="<?php echo site_url('admin/add_transport')?>" class="dropdown-item ">Tambah Transportasi</a>
@@ -108,63 +106,58 @@
           <div class="container">
             <div class="page-header">
               <h1 class="page-title">
-                Daftar Tiket
+                Dashboard
               </h1>
-              <div class="col-12">
+            </div>
+            <div class="row row-cards">
+              <div class="col-6 col-sm-4 col-lg-3">
                 <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Invoices</h3>
-                  </div>
-                  <div class="table-responsive">
-                    <table class="table card-table table-vcenter text-nowrap datatables">
-                      <thead>
-                        <tr>
-                          <th class="w-1">No.</th>
-                          <th>Invoice Subject</th>
-                          <th>Client</th>
-                          <th>VAT No.</th>
-                          <th>Created</th>
-                          <th>Status</th>
-                          <th>Price</th>
-                          <th></th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td><span class="text-muted">001401</span></td>
-                          <td><a href="invoice.html" class="text-inherit">Design Works</a></td>
-                          <td>
-                            Carlson Limited
-                          </td>
-                          <td>
-                            87956621
-                          </td>
-                          <td>
-                            15 Dec 2017
-                          </td>
-                          <td>
-                            <span class="status-icon bg-success"></span> Paid
-                          </td>
-                          <td>$887</td>
-                          <td class="text-right">
-                            <a href="javascript:void(0)" class="btn btn-secondary btn-sm">Manage</a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <script>
-                        $(document).ready(function() {
-                          $('.datatables').DataTable();
-                        } );
-                    </script>
+                  <div class="card-body p-3 text-center">
+                    <div class="text-right text-green">
+                      <i class="fe fe-codepen"></i>
+                    </div>
+                    <div class="h1 m-0"><?php echo $akun?></div>
+                    <div class="text-muted mb-4">Akun</div>
                   </div>
                 </div>
               </div>
-            </div>
+              <div class="col-6 col-sm-4 col-lg-3">
+                <div class="card">
+                  <div class="card-body p-3 text-center">
+                    <div class="text-right text-red">
+                      <i class="fe fe-codepen"></i>
+                    </div>
+                    <div class="h1 m-0"><?php echo $rute?></div>
+                    <div class="text-muted mb-4">Rute</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-sm-4 col-lg-3">
+                <div class="card">
+                  <div class="card-body p-3 text-center">
+                    <div class="text-right text-green">
+                      
+                      <i class="fe fe-codepen"></i>
+                    </div>
+                    <div class="h1 m-0"><?php echo $customer?></div>
+                    <div class="text-muted mb-4">Pelanggan</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-sm-4 col-lg-3">
+                <div class="card">
+                  <div class="card-body p-3 text-center">
+                    <div class="text-right text-red">
+                      <i class="fe fe-codepen"></i>
+                    </div>
+                    <div class="h1 m-0"><?php echo $transportation?></div>
+                    <div class="text-muted mb-4">Transportasi</div>
+                  </div>
+                </div>
+              </div>
+              
+              
           </div>
-            </div>
-            
           </div>
         </div>
       </div>

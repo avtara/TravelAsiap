@@ -79,13 +79,13 @@
                     <a href="<?php echo site_url('admin')?>" class="nav-link"><i class="fe fe-home"></i> Home</a>
                   </li>
                   <li class="nav-item">
-                    <a href="javascript:void(0)" class="nav-link active" data-toggle="dropdown">Tiket</a>
+                    <a href="javascript:void(0)" class="nav-link " data-toggle="dropdown">Tiket</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
                       <a href="<?php echo site_url('admin/ticket')?>" class="dropdown-item ">List Tiket</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown">Transportasi</a>
+                    <a href="javascript:void(0)" class="nav-link active" data-toggle="dropdown">Transportasi</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
                       <a href="<?php echo site_url('admin/transport')?>" class="dropdown-item ">Lihat Transportasi</a>
                       <a href="<?php echo site_url('admin/add_transport')?>" class="dropdown-item ">Tambah Transportasi</a>
@@ -108,7 +108,7 @@
           <div class="container">
             <div class="page-header">
               <h1 class="page-title">
-                Daftar Tiket
+                Daftar Transportasi
               </h1>
               <div class="col-12">
                 <div class="card">
