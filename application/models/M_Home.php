@@ -61,6 +61,15 @@
 			$this->db->update('reservation', $data);
 		}
 
+		function send_transfer(){
+			$data=array(
+				'price' => $this->input->post('price'),
+				'status' => 2
+			);
+			$this->db->where('reservation_code', $this->input->post('rcode'));
+			$this->db->update('reservation', $data);
+		}
+
 		function view_booking(){
 			$this->db->select('*');
 			$this->db->from('rute');

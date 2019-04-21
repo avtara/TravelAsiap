@@ -107,10 +107,17 @@
         <div class="my-3 my-md-5">
           <div class="container">
             <div class="page-header">
+
+              <div class="col-12">
+              <div class="d-flex">
               <h1 class="page-title">
                 Daftar Tiket
               </h1>
-              <div class="col-12">
+              <div class="d-flex order-lg-2 ml-auto">
+              <a href="<?php echo site_url('admin/ticket_pdf')?>" class="btn btn-green">Download PDF Laporan</a>
+              </div>
+              
+            </div>
                 <div class="card">
                   <div class="table-responsive">
                     <table class="table card-table table-vcenter text-nowrap" id="datatables">

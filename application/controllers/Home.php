@@ -69,6 +69,13 @@ class Home extends CI_Controller {
 		redirect('/Home/setting/'.$this->session->userdata('ses_id'),'refresh');
 	}
 
+	public function send_transfer(){
+		$data=array();
+		$this->M_Home->send_transfer();
+
+		redirect('/Home/setting/'.$this->session->userdata('ses_id'),'refresh');
+	}
+
 	//payment
 	public function payment($kode){
 		$data['payment'] = $this->M_Home->payment($kode);

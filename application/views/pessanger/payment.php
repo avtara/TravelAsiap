@@ -145,6 +145,42 @@
                                             </div>
                                         </div>  
                                         </form>
+                                        
+                                </div>
+                            </div>
+
+                            <div class="card ">
+                                <div class="card-header">
+                                    <h3 class="card-title"><i class="payment payment-visa"></i>&nbsp<i class="payment payment-mastercard"></i>&nbsp Transfer ATM</h3>
+                                    <div class="card-options">
+                                        <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                <form  method="post" action="<?php echo site_url('Home/send_transfer'); ?>" >
+                                    <input type="hidden" name="rcode" value="<?php echo $payment->reservation_code ?>">
+	                                <input type="hidden" name="price" value="<?php echo $totalPrice ?>">
+                                        <div class="container">
+                                            <p class="text-center">Untuk Membayar Silahkan Transfer ke :</p>
+                                            <h2 class="text-center">99213021<?php echo substr($payment->reservation_code, 12, 15); ?></h2>
+                                            <h4 class="text-center">Mandiri/BCA/BNI/BRI</h4>
+                                            <p class="">3 kode terakhir adalah kode khusus.</p>
+                                            
+                                        </div>
+                                    
+                                    <div class="row align-items-center flex-row-reverse">
+                                            <div class="col-auto ml-lg-auto">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <ul class="list-inline list-inline-dots mb-0">
+                                                                <input type="submit" class="btn btn-success" value="Bayar">
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        </form>
+                                        
                                 </div>
                             </div>
 
