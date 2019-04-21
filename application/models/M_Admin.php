@@ -46,6 +46,39 @@
 			);
 			$this->db->where('reservation_code', $this->input->post('rcode'));
 			$this->db->update('reservation', $data);
+        }
+        
+        function add_transport(){
+			$data=array(
+                'code' => $this->input->post('kode'),
+                'armada'=>$this->input->post('armada'),
+                'seat_qty'=>$this->input->post('seat'),
+                'id_transportation'=>$this->input->post('id_transportation'),
+			);
+			$this->db->insert('transportation', $data);
+        }
+
+        function add_rute(){
+			$data=array(
+                'depart_at' => $this->input->post('depart_at'),
+                'arrival'=>$this->input->post('arrival'),
+                'rute_from'=>$this->input->post('rute_from'),
+                'rute_to'=>$this->input->post('rute_to'),
+                'price'=>$this->input->post('price'),
+                'id_transportation'=>$this->input->post('armada'),
+			);
+			$this->db->insert('rute', $data);
+        }
+        
+        function view_kode(){
+            $this->db->select_max('id_transportation');
+            return $this->db->get('transportation')->row();
+        }
+
+        function armada(){
+			$this->db->select("*");
+			$this->db->from('transportation');
+			return $this->db->get()->result();
 		}
 
     }

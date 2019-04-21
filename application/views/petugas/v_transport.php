@@ -76,26 +76,24 @@
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item">
-                    <a href="<?php echo site_url('admin')?>" class="nav-link"><i class="fe fe-home"></i> Home</a>
+                    <a href="<?php echo site_url('petugas')?>" class="nav-link"><i class="fe fe-home"></i> Home</a>
                   </li>
                   <li class="nav-item">
                     <a href="javascript:void(0)" class="nav-link " data-toggle="dropdown">Tiket</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="<?php echo site_url('admin/ticket')?>" class="dropdown-item ">List Tiket</a>
+                      <a href="<?php echo site_url('petugas/ticket')?>" class="dropdown-item ">List Tiket</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link " data-toggle="dropdown">Transportasi</a>
+                    <a href="javascript:void(0)" class="nav-link active" data-toggle="dropdown">Transportasi</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="<?php echo site_url('admin/transport')?>" class="dropdown-item ">Lihat Transportasi</a>
-                      <a href="<?php echo site_url('admin/add_transport')?>" class="dropdown-item ">Tambah Transportasi</a>
+                      <a href="<?php echo site_url('petugas/transport')?>" class="dropdown-item ">Lihat Transportasi</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link active" data-toggle="dropdown">Rute</a>
+                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown">Rute</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="<?php echo site_url('admin/rute')?>" class="dropdown-item ">Lihat Rute</a>
-                      <a href="<?php echo site_url('admin/add_rute')?>" class="dropdown-item ">Buat Rute</a>
+                      <a href="<?php echo site_url('petugas/rute')?>" class="dropdown-item ">Lihat Rute</a>
                     </div>
                   </li>
                   
@@ -108,46 +106,34 @@
           <div class="container">
             <div class="page-header">
               <h1 class="page-title">
-                Daftar Rute
+                Daftar Transportasi
               </h1>
               <div class="col-12">
                 <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Invoices</h3>
+                  </div>
                   <div class="table-responsive">
                     <table class="table card-table table-vcenter text-nowrap datatables">
                       <thead>
                         <tr>
                           <th class="w-1">No.</th>
+                          <th>Kode Armada</th>
                           <th>Nama Armada</th>
-                          <th>Asal</th>
-                          <th>Tujuan</th>
-                          <th>Waktu Keberangkatan</th>
-                          <th>Waktu Sampai</th>
-                          <th>harga/org</th>
                           <th>Sisa Kursi</th>
                         </tr>
                       </thead>
                       <tbody>
-                      <?php $i = 1?>                      
-                      <?php foreach ($rute as $rute): ?>                        
-                      <tr>
-                          <td><?php echo $i++?></td>
-                          <td><span class="text-muted"><?php echo $rute['armada']?></span></td>
+                      <?php foreach ($transport as $transport): ?>                        <tr>
+                          <td><span class="text-muted"><?php echo $transport['id_transportation']?></span></td>
                           <td>
-                          <?php echo strstr($rute['rute_from'],'(', true)?>
+                          <?php echo $transport['code']?>
                           </td>
                           <td>
-                          <?php echo strstr($rute['rute_to'],'(', true)?>
+                          <?php echo $transport['armada']?>
                           </td>
                           <td>
-                          <?php echo date("H.i  d M Y", strtotime($rute['depart_at']));?>
-                          </td>
-                          <td>
-                          <?php echo date("H.i  d M Y", strtotime($rute['arrival']));?>
-                          </td>
-                          <td>
-                          <?php echo $rute['price']?></td>
-                          <td>
-                          <?php echo $rute['seat_qty']?></td>
+                          <?php echo $transport['seat_qty']?></td>
                         </tr>
                         <?php endforeach?>
                       </tbody>

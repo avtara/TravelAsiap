@@ -61,4 +61,43 @@ class Admin extends CI_Controller {
 
 		redirect('/admin/ticket/','refresh');
 	}
+
+	public function add_transport()
+	{
+		$data['transport'] = $this->M_Admin->transport();
+		$data['kode'] = $this->M_Admin->view_kode();
+		
+		if($this->session->userdata('ses_level')=='2'){
+			$this->load->view('admin/v_addtransport',$data);
+		}else{
+			redirect('home');
+		}
+	}
+	
+	public function add_trans(){
+		$data=array();
+		$this->M_Admin->add_transport();
+		
+
+		redirect('/admin/transport/','refresh');
+	}
+
+	public function add_rute()
+	{
+		$data['armada'] = $this->M_Admin->armada();
+		
+		if($this->session->userdata('ses_level')=='2'){
+			$this->load->view('admin/v_addrute',$data);
+		}else{
+			redirect('home');
+		}
+	}
+	
+	public function add_rut(){
+		$data=array();
+		$this->M_Admin->add_rute();
+		
+
+		redirect('/admin/rute/','refresh');
+	}
 }

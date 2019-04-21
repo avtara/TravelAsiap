@@ -85,14 +85,14 @@
                     </div>
                   </li>
                   <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link " data-toggle="dropdown">Transportasi</a>
+                    <a href="javascript:void(0)" class="nav-link active" data-toggle="dropdown">Transportasi</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
                       <a href="<?php echo site_url('admin/transport')?>" class="dropdown-item ">Lihat Transportasi</a>
                       <a href="<?php echo site_url('admin/add_transport')?>" class="dropdown-item ">Tambah Transportasi</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link active" data-toggle="dropdown">Rute</a>
+                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown">Rute</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
                       <a href="<?php echo site_url('admin/rute')?>" class="dropdown-item ">Lihat Rute</a>
                       <a href="<?php echo site_url('admin/add_rute')?>" class="dropdown-item ">Buat Rute</a>
@@ -108,55 +108,68 @@
           <div class="container">
             <div class="page-header">
               <h1 class="page-title">
-                Daftar Rute
+                Daftar Transportasi
               </h1>
               <div class="col-12">
                 <div class="card">
-                  <div class="table-responsive">
-                    <table class="table card-table table-vcenter text-nowrap datatables">
-                      <thead>
-                        <tr>
-                          <th class="w-1">No.</th>
-                          <th>Nama Armada</th>
-                          <th>Asal</th>
-                          <th>Tujuan</th>
-                          <th>Waktu Keberangkatan</th>
-                          <th>Waktu Sampai</th>
-                          <th>harga/org</th>
-                          <th>Sisa Kursi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      <?php $i = 1?>                      
-                      <?php foreach ($rute as $rute): ?>                        
-                      <tr>
-                          <td><?php echo $i++?></td>
-                          <td><span class="text-muted"><?php echo $rute['armada']?></span></td>
-                          <td>
-                          <?php echo strstr($rute['rute_from'],'(', true)?>
-                          </td>
-                          <td>
-                          <?php echo strstr($rute['rute_to'],'(', true)?>
-                          </td>
-                          <td>
-                          <?php echo date("H.i  d M Y", strtotime($rute['depart_at']));?>
-                          </td>
-                          <td>
-                          <?php echo date("H.i  d M Y", strtotime($rute['arrival']));?>
-                          </td>
-                          <td>
-                          <?php echo $rute['price']?></td>
-                          <td>
-                          <?php echo $rute['seat_qty']?></td>
-                        </tr>
-                        <?php endforeach?>
-                      </tbody>
-                    </table>
-                    <script>
-                        $(document).ready(function() {
-                          $('.datatables').DataTable();
-                        } );
-                    </script>
+                  <div class="card-body">
+                  <?php 
+  // cek buat user terbesar
+   $usr = $kode->id_transportation;
+   $newus = substr($usr,1,4);
+
+   $tambah=$newus+1;
+   if ($tambah<10) {
+    $id="T000".$tambah;
+  }
+  elseif ($tambah<100) {
+    $id="T00".$tambah;
+  }
+  else if($tambah<1000){
+    $id="T0".$tambah;
+  }
+  else{
+    $id="T".$tambah;
+  }
+
+  ?>
+                  <form  method="post" action="<?php echo site_url('admin/add_trans'); ?>" >
+                                    
+                  <input type="hidden" name="id_transportation" value="<?php echo($id); ?>">
+                                        <div class="row">
+                                                <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="form-label">Kode Armada</label>
+                                                            <input required type="text" name="kode" class="form-control" placeholder="Kode Armada">
+                                                        </div>
+                                                    </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">Nama Armada</label>
+                                                    <input type="text" required name="armada" class="form-control" placeholder="Nama Armada">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label  class="form-label">Jumlah Kursi</label>
+                                                    <input required type="number"  name="seat" class="form-control" placeholder="Total Kursi">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    <div class="row align-items-center flex-row-reverse">
+                                            <div class="col-auto ml-lg-auto">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <ul class="list-inline list-inline-dots mb-0">
+                                                                <input type="submit" class="btn btn-success" value="Tambah">
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        </form>
                   </div>
                 </div>
               </div>

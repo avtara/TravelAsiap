@@ -136,7 +136,12 @@ redirect($referred_from, 'refresh');
 					$this->session->set_userdata('ses_handphone',$data['handphone']);
 					redirect('admin/index');
 				}else{
-					echo 3;
+					$this->session->set_userdata('ses_id',$data['id_user']);
+					$this->session->set_userdata('ses_fullname',$data['fullname']);
+					$this->session->set_userdata('ses_level',$data['level']);
+					$this->session->set_userdata('ses_email',$data['email']);
+					$this->session->set_userdata('ses_handphone',$data['handphone']);
+					redirect('petugas/index');
 				}
 			}else{$this->session->set_flashdata('msg', '<div class="alert alert-icon alert-danger" role="alert">
 				<i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> <b>Username</b> atau <b>Password</b> anda salah, silahkan coba lagi!

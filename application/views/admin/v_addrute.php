@@ -112,51 +112,64 @@
               </h1>
               <div class="col-12">
                 <div class="card">
-                  <div class="table-responsive">
-                    <table class="table card-table table-vcenter text-nowrap datatables">
-                      <thead>
-                        <tr>
-                          <th class="w-1">No.</th>
-                          <th>Nama Armada</th>
-                          <th>Asal</th>
-                          <th>Tujuan</th>
-                          <th>Waktu Keberangkatan</th>
-                          <th>Waktu Sampai</th>
-                          <th>harga/org</th>
-                          <th>Sisa Kursi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      <?php $i = 1?>                      
-                      <?php foreach ($rute as $rute): ?>                        
-                      <tr>
-                          <td><?php echo $i++?></td>
-                          <td><span class="text-muted"><?php echo $rute['armada']?></span></td>
-                          <td>
-                          <?php echo strstr($rute['rute_from'],'(', true)?>
-                          </td>
-                          <td>
-                          <?php echo strstr($rute['rute_to'],'(', true)?>
-                          </td>
-                          <td>
-                          <?php echo date("H.i  d M Y", strtotime($rute['depart_at']));?>
-                          </td>
-                          <td>
-                          <?php echo date("H.i  d M Y", strtotime($rute['arrival']));?>
-                          </td>
-                          <td>
-                          <?php echo $rute['price']?></td>
-                          <td>
-                          <?php echo $rute['seat_qty']?></td>
-                        </tr>
-                        <?php endforeach?>
-                      </tbody>
-                    </table>
-                    <script>
-                        $(document).ready(function() {
-                          $('.datatables').DataTable();
-                        } );
-                    </script>
+                  <div class="card-body">
+                  <form  method="post" action="<?php echo site_url('admin/add_rut'); ?>" >
+                                        <div class="row">
+                                                <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="form-label">Keberangkatan</label>
+                                                            <input required type="datetime-local" name="depart_at" class="form-control" placeholder="Waktu Keberangkatan">
+                                                        </div>
+                                                    </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">Sampai</label>
+                                                    <input  type="datetime-local" required name="arrival" class="form-control" placeholder="Waktu Sampai">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label  class="form-label">Dari</label>
+                                                    <input required type="text"  name="rute_from" class="form-control" placeholder="Nama Kota(Kode)-Nama Bandara">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label  class="form-label">Menuju</label>
+                                                    <input required type="text"  name="rute_to" class="form-control" placeholder="Nama Kota(Kode)-Nama Bandara">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label  class="form-label">Harga</label>
+                                                    <input required type="number"  name="price" class="form-control" placeholder="Harga Per Orang">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label  class="form-label">Transportasi</label>
+                                                    <select class="form-control" name="armada" >
+                                                        <?php foreach ($armada as $data) { ?>
+					                                    <option value="<?php echo $data->id_transportation ?>"><?php echo $data->armada ?></option>
+					                                    <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    <div class="row align-items-center flex-row-reverse">
+                                            <div class="col-auto ml-lg-auto">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <ul class="list-inline list-inline-dots mb-0">
+                                                                <input type="submit" class="btn btn-success" value="Tambah">
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        </form>
                   </div>
                 </div>
               </div>

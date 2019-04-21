@@ -76,26 +76,24 @@
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item">
-                    <a href="<?php echo site_url('admin')?>" class="nav-link"><i class="fe fe-home"></i> Home</a>
+                    <a href="<?php echo site_url('petugas')?>" class="nav-link"><i class="fe fe-home"></i> Home</a>
                   </li>
                   <li class="nav-item">
                     <a href="javascript:void(0)" class="nav-link " data-toggle="dropdown">Tiket</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="<?php echo site_url('admin/ticket')?>" class="dropdown-item ">List Tiket</a>
+                      <a href="<?php echo site_url('petugas/ticket')?>" class="dropdown-item ">List Tiket</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">
                     <a href="javascript:void(0)" class="nav-link " data-toggle="dropdown">Transportasi</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="<?php echo site_url('admin/transport')?>" class="dropdown-item ">Lihat Transportasi</a>
-                      <a href="<?php echo site_url('admin/add_transport')?>" class="dropdown-item ">Tambah Transportasi</a>
+                      <a href="<?php echo site_url('petugas/transport')?>" class="dropdown-item ">Lihat Transportasi</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">
                     <a href="javascript:void(0)" class="nav-link active" data-toggle="dropdown">Rute</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="<?php echo site_url('admin/rute')?>" class="dropdown-item ">Lihat Rute</a>
-                      <a href="<?php echo site_url('admin/add_rute')?>" class="dropdown-item ">Buat Rute</a>
+                      <a href="<?php echo site_url('petugas/rute')?>" class="dropdown-item ">Lihat Rute</a>
                     </div>
                   </li>
                   

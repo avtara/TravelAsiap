@@ -76,26 +76,24 @@
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item">
-                    <a href="<?php echo site_url('admin')?>" class="nav-link"><i class="fe fe-home"></i> Home</a>
+                    <a href="<?php echo site_url('petugas')?>" class="nav-link"><i class="fe fe-home"></i> Home</a>
                   </li>
                   <li class="nav-item">
-                    <a href="javascript:void(0)" class="nav-link " data-toggle="dropdown">Tiket</a>
+                    <a href="javascript:void(0)" class="nav-link active" data-toggle="dropdown">Tiket</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="<?php echo site_url('admin/ticket')?>" class="dropdown-item ">List Tiket</a>
+                      <a href="<?php echo site_url('petugas/ticket')?>" class="dropdown-item ">List Tiket</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link " data-toggle="dropdown">Transportasi</a>
+                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown">Transportasi</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="<?php echo site_url('admin/transport')?>" class="dropdown-item ">Lihat Transportasi</a>
-                      <a href="<?php echo site_url('admin/add_transport')?>" class="dropdown-item ">Tambah Transportasi</a>
+                      <a href="<?php echo site_url('petugas/transport')?>" class="dropdown-item ">Lihat Transportasi</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link active" data-toggle="dropdown">Rute</a>
+                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown">Rute</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="<?php echo site_url('admin/rute')?>" class="dropdown-item ">Lihat Rute</a>
-                      <a href="<?php echo site_url('admin/add_rute')?>" class="dropdown-item ">Buat Rute</a>
+                      <a href="<?php echo site_url('petugas/rute')?>" class="dropdown-item ">Lihat Rute</a>
                     </div>
                   </li>
                   
@@ -108,53 +106,75 @@
           <div class="container">
             <div class="page-header">
               <h1 class="page-title">
-                Daftar Rute
+                Daftar Tiket
               </h1>
               <div class="col-12">
                 <div class="card">
                   <div class="table-responsive">
-                    <table class="table card-table table-vcenter text-nowrap datatables">
+                    <table class="table card-table table-vcenter text-nowrap" id="datatables">
                       <thead>
                         <tr>
                           <th class="w-1">No.</th>
-                          <th>Nama Armada</th>
-                          <th>Asal</th>
-                          <th>Tujuan</th>
-                          <th>Waktu Keberangkatan</th>
-                          <th>Waktu Sampai</th>
-                          <th>harga/org</th>
-                          <th>Sisa Kursi</th>
+                          <th>Pemesanan</th>
+                          <th>Client</th>
+                          <th>Armada</th>
+                          <th>Dari</th>
+                          <th>Menuju</th>
+                          <th>Berangkat </th>
+                          <th>Sampai</th>
+                          <th>Status</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                      <?php $i = 1?>                      
-                      <?php foreach ($rute as $rute): ?>                        
+                      <?php foreach ($ticket as $ticket): ?>
                       <tr>
-                          <td><?php echo $i++?></td>
-                          <td><span class="text-muted"><?php echo $rute['armada']?></span></td>
+                          <td><span class="text-muted"><?php echo $ticket['reservation_code']?></span></td>
+                          <td><?php echo date("D, d M Y", strtotime($ticket['reservation_date']));?></td>
                           <td>
-                          <?php echo strstr($rute['rute_from'],'(', true)?>
+                          <?php echo $ticket['name']?>
                           </td>
                           <td>
-                          <?php echo strstr($rute['rute_to'],'(', true)?>
+                          <?php echo $ticket['armada']?>
                           </td>
                           <td>
-                          <?php echo date("H.i  d M Y", strtotime($rute['depart_at']));?>
+                          <?php echo strstr($ticket['rute_from'],'(', true)?>
                           </td>
                           <td>
-                          <?php echo date("H.i  d M Y", strtotime($rute['arrival']));?>
+                          <?php echo strstr($ticket['rute_to'],'(', true)?>
                           </td>
                           <td>
-                          <?php echo $rute['price']?></td>
+                          <?php echo date("H.i  d M Y", strtotime($ticket['depart_at']));?>
+                          </td>
                           <td>
-                          <?php echo $rute['seat_qty']?></td>
+                          <?php echo date("H.i  d M Y", strtotime($ticket['arrival']));?>
+                          </td>
+                          <td>
+                          <?php if($ticket['status']==0):?>
+                            <span class="status-icon bg-danger"></span> Belum
+                            <?php elseif($ticket['status']==2):?>
+                            <span class="status-icon bg-warning"></span> Menunggu
+                            <?php elseif($ticket['status']==3):?>
+                            <span class="status-icon bg-success"></span> Bayar
+                          <?php endif?>
+                          </td>
+                          
+                          <td class="text-right">
+                          <form  method="post" action="<?php echo site_url('petugas/confirm'); ?>" >
+                          <input type="hidden" name="rcode" value="<?php echo $ticket['reservation_code'] ?>">
+                          <?php if($ticket['status']==2):?>
+                            <button type="submit" class="btn btn-secondary btn-sm">Konfirmasi</a>
+                          <?php endif?>
+                          </form>
+                          </td>
                         </tr>
-                        <?php endforeach?>
+                      <?php endforeach?>
+                        
                       </tbody>
                     </table>
                     <script>
                         $(document).ready(function() {
-                          $('.datatables').DataTable();
+                          $('#datatables').DataTable();
                         } );
                     </script>
                   </div>
