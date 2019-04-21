@@ -112,7 +112,7 @@
                 Daftar Tiket
               </h1>
               <div class="d-flex order-lg-2 ml-auto">
-              <a href="<?php echo site_url('admin/ticket_pdf')?>" class="btn btn-green">Download PDF Laporan</a>
+              <a href="<?php echo site_url('petugas/ticket_pdf')?>" class="btn btn-green">Download PDF Laporan</a>
               </div>
               
             </div>

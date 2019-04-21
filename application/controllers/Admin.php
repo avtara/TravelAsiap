@@ -104,7 +104,8 @@ class Admin extends CI_Controller {
 
 	function ticket_pdf(){
         $pdf = new FPDF('l','mm','A4');
-        // membuat halaman baru
+		// membuat halaman baru
+		$pdf->SetTitle("Laporan Tiket ".date("F j, Y, g:i a"));
         $pdf->AddPage();
         // setting jenis font yang akan digunakan
         $pdf->SetFont('Arial','B',16);
